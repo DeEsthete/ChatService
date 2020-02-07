@@ -16,7 +16,7 @@ namespace MessageService.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MessagesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

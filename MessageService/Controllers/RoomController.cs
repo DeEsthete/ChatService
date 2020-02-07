@@ -13,7 +13,7 @@ namespace MessageService.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RoomController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
