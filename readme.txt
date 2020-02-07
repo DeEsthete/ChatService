@@ -1,3 +1,19 @@
+messageDto:
+{
+  "id": '',
+  "creationDate": '',
+  "chatRoomId": '',
+  "senderId": '',
+  "text": ''
+}
+
+roomDto:
+{
+  "id": '',
+  "creationDate": '',
+  "name": ''
+}
+
 [GET]api/chat/room/{id} ¬озвращает вообще все сообщени€ комнаты
 [GET]api/chat/{pageIndex}/{pageSize}/{chatRoomId} ¬озвращает сообщени€ комнаты постранично
 [GET]api/chat/{id} ¬озвращает одно сообщение
