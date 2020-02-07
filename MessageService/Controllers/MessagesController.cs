@@ -27,21 +27,10 @@ namespace MessageService.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public IActionResult GetAll(long? chatRoomId)
+        [HttpGet("room/{id}")]
+        public IActionResult GetMessagesByRoom(long id)
         {
-            var messages = _context.ChatMessages;
-
-            if (chatRoomId.HasValue)
-                messages.Where(m => m.ChatRoomId == chatRoomId);
-
-            return Ok(messages.Select(m => m.ToChatMessageDto()).ToList());
-        }
-
-        [HttpGet("room/{chatRoomId}")]
-        public IActionResult GetMessagesByRoom(long chatRoomId)
-        {
-            var messages = _context.ChatMessages.Where(m => m.ChatRoomId == chatRoomId);
+            var messages = _context.ChatMessages.Where(m => m.ChatRoomId == id);
             return Ok(messages.Select(m => m.ToChatMessageDto()).ToList());
         }
 

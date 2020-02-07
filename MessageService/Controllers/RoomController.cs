@@ -45,6 +45,7 @@ namespace MessageService.Controllers
         {
             var roomDtos = _context.UserChatRooms.Include(ur => ur.ChatRoom)
                                                  .Where(ur => ur.UserId == userId)
+                                                 .Distinct()
                                                  .Select(ur => ur.ChatRoom.ToChatRoomDto());
 
             return Ok(roomDtos);
