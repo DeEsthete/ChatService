@@ -1,5 +1,6 @@
 ﻿using Domain.Data;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Model.Entities;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MessageService.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class RoomController : ControllerBase

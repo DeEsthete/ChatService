@@ -4,18 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Data;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Entities;
+using SignalR;
 
 namespace MessageService.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class MessagesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<ChatHub> _chatHubContext;
 
         public MessagesController(ApplicationDbContext context)
         {
@@ -81,10 +86,15 @@ namespace MessageService.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateEntity(ChatMessageDto messageDto)
+        public async Task<IActionResult> SendMessage(ChatMessageDto messageDto)
         {
+            var userIds = _context.UserChatRooms.Where(uc => uc.ChatRoomId == messageDto.ChatRoomId)
+                                                .Select(uc => uc.UserId);
+
             _context.ChatMessages.Add(new ChatMessage(messageDto));
             _context.SaveChanges();
+
+            await _chatHubContext.Clients.Users(userIds.ToList()).SendAsync("receiveMessage", messageDto).ConfigureAwait(false);
             return NoContent();
         }
 
