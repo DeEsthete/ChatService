@@ -29,9 +29,9 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: UseDotNet@2 
-  displayName: ".NET Core 3.0.0"
+  displayName: ".NET Core 4.7.1"
   inputs:
-    version: '3.0.0'
+    version: '4.7.1'
     packageType: sdk
 
 - task: VSTest@2
