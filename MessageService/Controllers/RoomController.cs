@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace MessageService.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class RoomController : ControllerBase

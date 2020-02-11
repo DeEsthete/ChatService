@@ -14,7 +14,6 @@ using SignalR;
 
 namespace MessageService.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MessagesController : ControllerBase
@@ -22,9 +21,10 @@ namespace MessageService.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IHubContext<ChatHub> _chatHubContext;
 
-        public MessagesController(ApplicationDbContext context)
+        public MessagesController(ApplicationDbContext context, IHubContext<ChatHub> chatHubContext)
         {
             _context = context;
+            _chatHubContext = chatHubContext;
         }
 
         [HttpGet("room/{id}")]
